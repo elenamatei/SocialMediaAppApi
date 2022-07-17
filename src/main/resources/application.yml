@@ -1,0 +1,19 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+
+  datasource:
+    password: 2116235piti
+    url: jdbc:postgresql://localhost:5433/social-media-api
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto:  validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
