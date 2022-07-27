@@ -32,6 +32,7 @@ public class UserService{
 
         user.setPassword(encodedPassword);
         userRepository.save(user);
+        
 
         Token newToken = new Token();
 

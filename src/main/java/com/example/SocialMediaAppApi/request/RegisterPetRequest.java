@@ -1,6 +1,8 @@
 package com.example.SocialMediaAppApi.request;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,7 +13,7 @@ import java.time.LocalDate;
 @Getter
 @EqualsAndHashCode
 @ToString
-@AllArgsConstructor
+
 public class RegisterPetRequest {
     private final String name;
     private final String type;
@@ -25,5 +27,18 @@ public class RegisterPetRequest {
     private final String picture;
     private final String token;
 
-
+    @JsonCreator
+    public RegisterPetRequest(@JsonProperty("name")String name,@JsonProperty("type") String type,@JsonProperty("race") String race,@JsonProperty("color") String color,@JsonProperty("birthDate") LocalDate birthDate,@JsonProperty("gender") String gender,@JsonProperty("favouriteFood") String favouriteFood,@JsonProperty("description") String description,@JsonProperty("isNeutered") String isNeutered,@JsonProperty("picture") String picture,@JsonProperty("token") String token) {
+        this.name = name;
+        this.type = type;
+        this.race = race;
+        this.color = color;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.favouriteFood = favouriteFood;
+        this.description = description;
+        this.isNeutered = isNeutered;
+        this.picture = picture;
+        this.token = token;
+    }
 }

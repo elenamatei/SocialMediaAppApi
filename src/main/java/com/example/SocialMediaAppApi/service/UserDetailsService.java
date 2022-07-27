@@ -1,9 +1,9 @@
 package com.example.SocialMediaAppApi.service;
 
 
-import com.example.SocialMediaAppApi.model.Pet;
-import com.example.SocialMediaAppApi.repository.PetsRepository;
-import com.example.SocialMediaAppApi.request.RegisterPetRequest;
+import com.example.SocialMediaAppApi.model.Details;
+import com.example.SocialMediaAppApi.repository.UserDetailsRepository;
+import com.example.SocialMediaAppApi.request.UserDetailsRequest;
 import com.example.SocialMediaAppApi.security.token.Token;
 import com.example.SocialMediaAppApi.security.token.TokenService;
 import lombok.AllArgsConstructor;
@@ -17,38 +17,36 @@ import java.security.NoSuchAlgorithmException;
 
 @Service
 @AllArgsConstructor
-public class RegisterPetService {
-    private final PetService petService;
+public class UserDetailsService {
+
     private final TokenService tokenService;
-    private final PetsRepository petsRepository;
+    private final UserDetailsRepository userDetailsRepository;
+
+    public String addDetails(UserDetailsRequest request){
+        Token newToken = tokenService.verifyToken(request.getToken());
+        System.out.println(photoProcessing(request.getProfilePicture(), newToken.getUser().getEmail()));
+        String pictureURL = photoProcessing(request.getProfilePicture(), newToken.getUser().getEmail());
+
+        Details details = new Details(
+                request.getBirthPlace(),
+                request.getLivingCity(),
+                request.getOccupation(),
+                request.getWorkPlace(),
+                request.getStudies(),
+                request.getDescription(),
+                pictureURL,
+                newToken.getUser()
 
 
-    public String register(RegisterPetRequest request){
-
-       Token newToken = tokenService.verifyToken(request.getToken());
-
-       String pictureURL = photoProcessing(request.getPicture(), newToken.getUser().getEmail());
-
-
-        Pet pet = new Pet(
-
-        request.getName(),
-        request.getType(),
-        request.getRace(),
-        request.getColor(),
-        request.getBirthDate(),
-        request.getGender(),
-        request.getFavouriteFood(),
-        request.getDescription(),
-        request.getIsNeutered(),
-        pictureURL,
-        newToken.getUser()
 
         );
+        System.out.println("occup"+ details.getOccupation());
 
 
-        petsRepository.save(pet);
-        return "Register done!";
+
+        userDetailsRepository.save(details);
+        return "details added!";
+
     }
 
     public String photoProcessing(String photoString, String userEmail){

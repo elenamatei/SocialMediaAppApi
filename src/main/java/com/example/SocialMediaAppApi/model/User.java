@@ -1,20 +1,20 @@
 package com.example.SocialMediaAppApi.model;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
+
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.time.Period;
 
 
 @Entity
 @Table(name="Users")
 @Getter
 @Setter
-//@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class User{
@@ -36,9 +36,25 @@ public class User{
     private String password;
     private String gender;
     private LocalDate birthDate;
-    private LocalDate joinedDate;
+    private LocalDate joinedDate = LocalDate.now();
+    private String age = calculateAge(birthDate);
 
-    public User(String firstName, String lastName, String email, String password, String gender, LocalDate birthDate, LocalDate joinedDate) {
+
+
+public User( String firstName, String lastName,String email,String password, String gender,LocalDate birthDate,LocalDate joinedDate) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.password = password;
+    this.gender = gender;
+    this.birthDate = birthDate;
+    this.joinedDate = joinedDate;
+}
+    public User( String firstName, String lastName,String email,String password ,LocalDate birthDate,LocalDate joinedDate, String gender) {
+
+    }
+
+    public User(String firstName, String lastName, String email, String password, String gender, LocalDate birthDate, LocalDate joinedDate, String age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -46,12 +62,35 @@ public class User{
         this.gender = gender;
         this.birthDate = birthDate;
         this.joinedDate = joinedDate;
+        this.age = age;
     }
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
+
+
+    public static String calculateAge(LocalDate birthDate)
+    {
+
+        LocalDate currentDate = LocalDate.now();
+        if ((birthDate != null) && (currentDate != null))
+        {
+            Period period = Period.between(birthDate, currentDate);
+            if(period.isZero()) return period.getMonths()+" months";
+            else
+
+            return period.getYears()+" years and " + period.getMonths() + " months";
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+
+
 
     public String getFullName() {
         return firstName + " " + lastName;

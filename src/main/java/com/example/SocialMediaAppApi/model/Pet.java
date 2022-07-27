@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 
 @Entity
@@ -36,6 +37,7 @@ public class Pet {
     private String description;
     private String isNeutered;
     private Boolean isAdoption = false;
+    private String age = calculateAge(birthDate);
 
     public Pet(String name, String type, String race,String color, LocalDate birthDate, String gender, String favouriteFood, String description,String isNeutered, String picture, User user) {
         this.name = name;
@@ -50,6 +52,40 @@ public class Pet {
         this.picture = picture;
         this.user = user;
 
+    }
+
+    public Pet(User user, String picture, String name, String type, String race, String color, LocalDate birthDate, String gender, String favouriteFood, String description, String isNeutered, Boolean isAdoption, String age) {
+        this.user = user;
+        this.picture = picture;
+        this.name = name;
+        this.type = type;
+        this.race = race;
+        this.color = color;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.favouriteFood = favouriteFood;
+        this.description = description;
+        this.isNeutered = isNeutered;
+        this.isAdoption = isAdoption;
+        this.age = age;
+    }
+
+    public static String calculateAge(LocalDate birthDate)
+    {
+
+        LocalDate currentDate = LocalDate.now();
+        if ((birthDate != null) && (currentDate != null))
+        {
+            Period period = Period.between(birthDate, currentDate);
+            if(period.isZero()) return period.getMonths()+" months";
+            else
+
+                return period.getYears()+" years and " + period.getMonths() + " months";
+        }
+        else
+        {
+            return null;
+        }
     }
 
 
