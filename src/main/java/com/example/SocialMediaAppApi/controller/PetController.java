@@ -4,9 +4,11 @@ package com.example.SocialMediaAppApi.controller;
 import com.example.SocialMediaAppApi.model.Pet;
 import com.example.SocialMediaAppApi.model.User;
 import com.example.SocialMediaAppApi.repository.PetsRepository;
+import com.example.SocialMediaAppApi.service.PetService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -14,25 +16,24 @@ import java.util.List;
 public class PetController {
 
     private final PetsRepository petsRepository;
+    private final PetService petService;
 
-//    @GetMapping("/myPets/{user_id}")
-    @GetMapping("/myPets}")
-    List<Pet> allUserPets() {
-        return petsRepository.findByUser_Id();
+    @GetMapping("/myPets/{user_id}")
+    Collection<Pet> allUserPets(@PathVariable Long user_id) {
+        return petService.getPetsByUserId(user_id);
     }
 
 
-//    @GetMapping("/petProfile/{user_id}/{id}")
-    @GetMapping("/petProfile/{id}")
-    Pet oneUserPet(@PathVariable Long id) {
+    @GetMapping("/petProfile/{user_id}/{id}")
+    Pet oneUserPet(@PathVariable Long user_id,@PathVariable Long id ) {
 
-        return petsRepository.getById(id);
+        return petService.getOnePetByUserId(user_id,id);
 //                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-//    @PutMapping("/editPetProfile/{user_id}/{id}")
-    @PutMapping("/editPetProfile/{id}")
-    Pet editPet(@RequestBody Pet updatedPet, @PathVariable Long id) {
+    @PutMapping("/editPetProfile/{user_id}/{id}")
+//    @PutMapping("/editPetProfile/{id}")
+    Pet editPet(@RequestBody Pet updatedPet, @PathVariable Long user_id, @PathVariable Long id) {
 
         return petsRepository.findById(id)
                 .map(pet -> {

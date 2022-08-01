@@ -3,6 +3,7 @@ package com.example.SocialMediaAppApi.service;
 
 import com.example.SocialMediaAppApi.model.Details;
 import com.example.SocialMediaAppApi.repository.UserDetailsRepository;
+import com.example.SocialMediaAppApi.repository.UserRepository;
 import com.example.SocialMediaAppApi.request.UserDetailsRequest;
 import com.example.SocialMediaAppApi.security.token.Token;
 import com.example.SocialMediaAppApi.security.token.TokenService;
@@ -21,6 +22,7 @@ public class UserDetailsService {
 
     private final TokenService tokenService;
     private final UserDetailsRepository userDetailsRepository;
+    private final UserRepository userRepository;
 
     public String addDetails(UserDetailsRequest request){
         Token newToken = tokenService.verifyToken(request.getToken());
@@ -99,6 +101,11 @@ public class UserDetailsService {
         catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Details getDetailsForUser(Long user_id){
+        return userDetailsRepository.getDetailsForUser(userRepository.getById(user_id));
+
     }
 
 

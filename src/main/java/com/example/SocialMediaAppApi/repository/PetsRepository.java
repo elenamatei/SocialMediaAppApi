@@ -2,10 +2,12 @@ package com.example.SocialMediaAppApi.repository;
 
 
 import com.example.SocialMediaAppApi.model.Pet;
+import com.example.SocialMediaAppApi.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
 
 @Repository
@@ -16,9 +18,13 @@ public interface PetsRepository extends JpaRepository<Pet, Long> {
     @Override
     Pet getById(Long id);
 
-    Pet getByIdAndUser(Long id, Long user_id);
+    @Query("SELECT p FROM Pet p WHERE p.user.id=?1")
+    Collection<Pet> getPetsByUserId(User user);
+
+    @Query("SELECT p FROM Pet p WHERE p.user.id=?1 AND p.id=?1")
+    Pet getOnePetByUserId(User user, Pet pet);
 
 
-//    List<Pet> findByUser_Id(Long user_id);
-    List<Pet> findByUser_Id();
 }
+
+

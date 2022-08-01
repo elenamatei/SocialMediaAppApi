@@ -28,6 +28,13 @@ public class Post {
     private String text;
     private LocalDate postDate;
 
+    public Post(String picture, String text, LocalDate postDate, User user) {
+        this.picture = picture;
+        this.text = text;
+        this.postDate = postDate;
+        this.user = user;
+    }
+
 
     @Override
     public String toString() {

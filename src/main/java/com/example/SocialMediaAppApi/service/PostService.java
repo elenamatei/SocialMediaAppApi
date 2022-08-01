@@ -1,55 +1,46 @@
 package com.example.SocialMediaAppApi.service;
 
 
-import com.example.SocialMediaAppApi.model.Pet;
-import com.example.SocialMediaAppApi.repository.PetsRepository;
-import com.example.SocialMediaAppApi.request.RegisterPetRequest;
+import com.example.SocialMediaAppApi.model.Post;
+import com.example.SocialMediaAppApi.model.User;
+import com.example.SocialMediaAppApi.repository.PostsRepository;
+import com.example.SocialMediaAppApi.request.PostRequest;
 import com.example.SocialMediaAppApi.security.token.Token;
 import com.example.SocialMediaAppApi.security.token.TokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class RegisterPetService {
+public class PostService {
 
     private final TokenService tokenService;
-    private final PetsRepository petsRepository;
+    private final PostsRepository postsRepository;
 
+    public String publishPost(PostRequest request){
+        Token newToken = tokenService.verifyToken(request.getToken());
+        String pictureURL = photoProcessing(request.getPicture(), newToken.getUser().getEmail());
 
-    public String register(RegisterPetRequest request){
-
-       Token newToken = tokenService.verifyToken(request.getToken());
-
-       String pictureURL = photoProcessing(request.getPicture(), newToken.getUser().getEmail());
-
-
-        Pet pet = new Pet(
-
-        request.getName(),
-        request.getType(),
-        request.getRace(),
-        request.getColor(),
-        request.getBirthDate(),
-        request.getGender(),
-        request.getFavouriteFood(),
-        request.getDescription(),
-        request.getIsNeutered(),
-        pictureURL,
-        newToken.getUser()
+        Post post = new Post(
+                pictureURL,
+                request.getText(),
+                request.getPostDate(),
+                newToken.getUser()
 
         );
+        postsRepository.save(post);
+        return "post published";
 
-
-        petsRepository.save(pet);
-        return "Register done!";
     }
+
 
     public String photoProcessing(String photoString, String userEmail){
 
@@ -103,5 +94,7 @@ public class RegisterPetService {
         }
     }
 
+    @GetMapping("/feed")
+    List<Post> allPosts() { return postsRepository.findAll(); }
 
 }

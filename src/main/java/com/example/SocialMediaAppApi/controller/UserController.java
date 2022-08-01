@@ -2,6 +2,7 @@ package com.example.SocialMediaAppApi.controller;
 
 import com.example.SocialMediaAppApi.model.User;
 import com.example.SocialMediaAppApi.repository.UserRepository;
+import com.example.SocialMediaAppApi.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,9 +10,11 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/api")
 public class UserController {
 
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @GetMapping("/allUsers")
     List<User> allUsers() {
@@ -22,7 +25,7 @@ public class UserController {
     @GetMapping("/profile/{id}")
     User oneUser(@PathVariable Long id) {
 
-        return userRepository.getById(id);
+        return userService.getUserById(id);
 //                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
