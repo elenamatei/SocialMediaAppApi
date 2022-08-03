@@ -26,7 +26,7 @@ public class UserDetailsService {
 
     public String addDetails(UserDetailsRequest request){
         Token newToken = tokenService.verifyToken(request.getToken());
-        System.out.println(photoProcessing(request.getProfilePicture(), newToken.getUser().getEmail()));
+
         String pictureURL = photoProcessing(request.getProfilePicture(), newToken.getUser().getEmail());
 
         Details details = new Details(
@@ -42,7 +42,7 @@ public class UserDetailsService {
 
 
         );
-        System.out.println("occup"+ details.getOccupation());
+
 
 
 

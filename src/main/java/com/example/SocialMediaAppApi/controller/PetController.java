@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 @AllArgsConstructor
 public class PetController {
 
@@ -20,20 +22,22 @@ public class PetController {
 
     @GetMapping("/myPets/{user_id}")
     Collection<Pet> allUserPets(@PathVariable Long user_id) {
+
         return petService.getPetsByUserId(user_id);
+
     }
 
 
     @GetMapping("/petProfile/{user_id}/{id}")
-    Pet oneUserPet(@PathVariable Long user_id,@PathVariable Long id ) {
-
-        return petService.getOnePetByUserId(user_id,id);
+    Optional<Pet> oneUserPet(@PathVariable("user_id") Long user_id, @PathVariable("id") Long id ) {
+        System.out.println("a INTRAT");
+        return petService.getPetByUserId(user_id,id);
 //                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @PutMapping("/editPetProfile/{user_id}/{id}")
 //    @PutMapping("/editPetProfile/{id}")
-    Pet editPet(@RequestBody Pet updatedPet, @PathVariable Long user_id, @PathVariable Long id) {
+    Pet editPet(@RequestBody Pet updatedPet, @PathVariable("user_id") Long user_id, @PathVariable("id") Long id) {
 
         return petsRepository.findById(id)
                 .map(pet -> {

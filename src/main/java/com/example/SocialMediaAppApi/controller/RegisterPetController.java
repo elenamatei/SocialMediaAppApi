@@ -18,6 +18,7 @@ public class RegisterPetController {
 
     @PostMapping
     public String petRegister(@RequestBody RegisterPetRequest request){
+
         return registerPetService.register(request);
     }
 }

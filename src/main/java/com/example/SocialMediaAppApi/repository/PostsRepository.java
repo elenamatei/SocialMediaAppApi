@@ -13,5 +13,8 @@ public interface PostsRepository extends JpaRepository<Post, Long> {
     List<Post> findAll();
 
     @Override
-    Post getById(Long aLong);
+    Post getById(Long id);
+
+    @Override
+    void deleteById(Long id);
 }

@@ -94,7 +94,6 @@ public class PostService {
         }
     }
 
-    @GetMapping("/feed")
-    List<Post> allPosts() { return postsRepository.findAll(); }
+
 
 }

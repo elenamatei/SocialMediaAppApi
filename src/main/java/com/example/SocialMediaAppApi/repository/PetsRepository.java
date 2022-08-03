@@ -22,7 +22,10 @@ public interface PetsRepository extends JpaRepository<Pet, Long> {
     Collection<Pet> getPetsByUserId(User user);
 
     @Query("SELECT p FROM Pet p WHERE p.user.id=?1 AND p.id=?1")
-    Pet getOnePetByUserId(User user, Pet pet);
+    Optional<Pet> getOnePetByUserId(Optional<User> user, Optional<Pet> pet);
+
+    @Query("SELECT p FROM Pet p WHERE p.type=?1")
+    Collection<Pet> getPetsByType(String type);
 
 
 }

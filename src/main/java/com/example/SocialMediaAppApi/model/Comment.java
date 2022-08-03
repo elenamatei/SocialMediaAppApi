@@ -29,6 +29,16 @@ public class Comment {
 //    private Long userId;
     private String text;
 
+
+    public Comment(String text, User user, Post post) {
+        this.text = text;
+        this.user = user;
+        this.post = post;
+
+
+
+    }
+
     @Override
     public String toString() {
         return "Comment{" +

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -23,7 +24,8 @@ public class UserController {
 
 
     @GetMapping("/profile/{id}")
-    User oneUser(@PathVariable Long id) {
+    Optional<User> oneUser(@PathVariable Long id) {
+        System.out.println(id +" qsbxdnchbgevwgabshnGVBJCXCVBNK");
 
         return userService.getUserById(id);
 //                .orElseThrow(() -> new UserNotFoundException(id));
