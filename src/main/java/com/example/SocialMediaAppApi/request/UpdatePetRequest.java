@@ -3,19 +3,19 @@ package com.example.SocialMediaAppApi.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.time.LocalDate;
-import java.time.Period;
 
 @Getter
 @EqualsAndHashCode
 @ToString
+public class UpdatePetRequest {
 
-public class RegisterPetRequest {
+    private final String token;
+    private final String picture;
     private final String name;
     private final String type;
     private final String race;
@@ -25,11 +25,11 @@ public class RegisterPetRequest {
     private final String favouriteFood;
     private final String description;
     private final String isNeutered;
-    private final String picture;
-    private final String token;
 
     @JsonCreator
-    public RegisterPetRequest(@JsonProperty("name")String name,@JsonProperty("type") String type,@JsonProperty("race") String race,@JsonProperty("color") String color,@JsonProperty("birthDate") LocalDate birthDate,@JsonProperty("gender") String gender,@JsonProperty("favouriteFood") String favouriteFood,@JsonProperty("description") String description,@JsonProperty("isNeutered") String isNeutered,@JsonProperty("picture") String picture,@JsonProperty("token") String token) {
+    public UpdatePetRequest(@JsonProperty("token") String token,@JsonProperty("picture") String picture,@JsonProperty("name") String name,@JsonProperty("type") String type,@JsonProperty("race") String race,@JsonProperty("color")String color,@JsonProperty("birthDate") LocalDate birthDate,@JsonProperty("gender") String gender,@JsonProperty("favouriteFood") String favouriteFood,@JsonProperty("description") String description,@JsonProperty("isNeutered") String isNeutered) {
+        this.token = token;
+        this.picture = picture;
         this.name = name;
         this.type = type;
         this.race = race;
@@ -39,10 +39,5 @@ public class RegisterPetRequest {
         this.favouriteFood = favouriteFood;
         this.description = description;
         this.isNeutered = isNeutered;
-        this.picture = picture;
-        this.token = token;
-
     }
-
-
 }

@@ -25,16 +25,25 @@ public class UserDetailsController {
 
     }
 //
-//    @GetMapping("/allUsers")
+//    @GetMapping("/allDetails")
 //    List<Details> allUsers() {
 //        return userDetailsRepository.findAll();
 //    }
-
-
-//    @GetMapping("/profile/{user_id}")
-//    Details oneUser(@PathVariable Long user_id) {
+//
+////
+//    @GetMapping("/details/{user_id}")
+//    Details oneUserDetails(@PathVariable("user_id") Long user_id) {
 //
 //        return userDetailsService.getDetailsForUser(user_id);
+////                .orElseThrow(() -> new UserNotFoundException(id));
+//    }
+
+
+
+//    @GetMapping("/details/{user_id}")
+//    Details oneUserDetails(@PathVariable("user_id") Long user_id) {
+//
+//        return userDetailsRepository.getDetailsForUser(user_id);
 ////                .orElseThrow(() -> new UserNotFoundException(id));
 //    }
 

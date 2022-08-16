@@ -21,16 +21,19 @@ public class PetController {
     private final PetService petService;
 
     @GetMapping("/myPets/{user_id}")
-    Collection<Pet> allUserPets(@PathVariable Long user_id) {
-
+    String allUserPets(@PathVariable Long user_id) {
         return petService.getPetsByUserId(user_id);
+    }
 
+   @GetMapping("/pets/{type}/{user_id}")
+    String petForUser(@PathVariable("type") String type , @PathVariable("user_id") Long user_id) {
+       return petService.getPetsForUserByType(type, user_id);
     }
 
 
     @GetMapping("/petProfile/{user_id}/{id}")
-    Optional<Pet> oneUserPet(@PathVariable("user_id") Long user_id, @PathVariable("id") Long id ) {
-        System.out.println("a INTRAT");
+    Pet oneUserPet(@PathVariable("user_id") Long user_id, @PathVariable("id") Long id ) {
+        System.out.println(petService.getPetByUserId(user_id,id));
         return petService.getPetByUserId(user_id,id);
 //                .orElseThrow(() -> new UserNotFoundException(id));
     }

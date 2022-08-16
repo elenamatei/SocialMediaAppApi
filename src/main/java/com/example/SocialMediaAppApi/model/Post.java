@@ -31,7 +31,12 @@ public class Post {
     public Post(String picture, String text, LocalDate postDate, User user) {
         this.picture = picture;
         this.text = text;
-        this.postDate = postDate;
+        this.postDate = LocalDate.now();
+        this.user = user;
+    }
+    public Post(String picture, String text, User user) {
+        this.picture = picture;
+        this.text = text;
         this.user = user;
     }
 

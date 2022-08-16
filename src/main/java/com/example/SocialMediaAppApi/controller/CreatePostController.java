@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/api/createPost")
 @AllArgsConstructor
 public class CreatePostController {
     private final PostService postService;
@@ -22,7 +22,7 @@ public class CreatePostController {
         return postService.publishPost(request);
     }
 
-    @GetMapping("/feed")
-    List<Post> allPosts() { return postsRepository.findAll(); }
+//    @GetMapping("/feed")
+//    List<Post> allPosts() { return postsRepository.findAll(); }
 
 }

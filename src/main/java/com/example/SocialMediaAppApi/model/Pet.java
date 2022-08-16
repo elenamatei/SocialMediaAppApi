@@ -15,7 +15,7 @@ import java.time.Period;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Pet {
 
     @ManyToOne
@@ -23,7 +23,7 @@ public class Pet {
     private User user;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     //private Long user_id;
     private String picture;
@@ -37,9 +37,9 @@ public class Pet {
     private String description;
     private String isNeutered;
     private Boolean isAdoption = false;
-    private String age = calculateAge(birthDate);
+//    private String age;
 
-    public Pet(String name, String type, String race,String color, LocalDate birthDate, String gender, String favouriteFood, String description,String isNeutered, String picture, User user) {
+    public Pet(String name, String type, String race, String color, LocalDate birthDate, String gender, String favouriteFood, String description, String isNeutered, String picture, User user) {
         this.name = name;
         this.type = type;
         this.race = race;
@@ -51,34 +51,24 @@ public class Pet {
         this.isNeutered = isNeutered;
         this.picture = picture;
         this.user = user;
+//        this.age = calculateAge(birthDate);
 
     }
 
-    public Pet(User user, String picture, String name, String type, String race, String color, LocalDate birthDate, String gender, String favouriteFood, String description, String isNeutered, Boolean isAdoption, String age) {
-        this.user = user;
-        this.picture = picture;
-        this.name = name;
-        this.type = type;
-        this.race = race;
-        this.color = color;
-        this.birthDate = birthDate;
-        this.gender = gender;
-        this.favouriteFood = favouriteFood;
-        this.description = description;
-        this.isNeutered = isNeutered;
-        this.isAdoption = isAdoption;
-        this.age = age;
-    }
 
     public static String calculateAge(LocalDate birthDate)
     {
 
         LocalDate currentDate = LocalDate.now();
+
         if ((birthDate != null) && (currentDate != null))
         {
             Period period = Period.between(birthDate, currentDate);
-            if(period.isZero()) return period.getMonths()+" months";
+            if(period.getYears() == 0) return period.getMonths()+" months";
             else
+            if(period.getMonths() == 0){
+                return period.getYears() + " years";
+            } else
 
                 return period.getYears()+" years and " + period.getMonths() + " months";
         }
@@ -87,8 +77,6 @@ public class Pet {
             return null;
         }
     }
-
-
 
 
     @Override

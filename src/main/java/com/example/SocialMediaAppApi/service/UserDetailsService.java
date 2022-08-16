@@ -39,8 +39,6 @@ public class UserDetailsService {
                 pictureURL,
                 newToken.getUser()
 
-
-
         );
 
 
@@ -75,6 +73,7 @@ public class UserDetailsService {
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
             outputStream.write(data);
             System.out.println(path);
+            path = "/api/uploads/"+ pictureName +"." + extension;
             return path;
         } catch (IOException e) {
             e.printStackTrace();
@@ -104,9 +103,13 @@ public class UserDetailsService {
     }
 
     public Details getDetailsForUser(Long user_id){
-        return userDetailsRepository.getDetailsForUser(userRepository.getById(user_id));
+
+        System.out.println(userDetailsRepository.getDetailsForUser(user_id) + "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+        return userDetailsRepository.getDetailsForUser(user_id);
+
 
     }
+
 
 
 }

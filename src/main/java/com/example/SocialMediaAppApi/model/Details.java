@@ -42,14 +42,14 @@ public class Details {
     }
 
 
-    public Details(String description, String occupation, String birthPlace, String workPlace, String profilePicture, String livingCity, String studies, User user) {
-        this.description = description;
-        this.occupation = occupation;
+    public Details( String birthPlace,String livingCity,String occupation, String workPlace, String studies,String description,  String profilePicture,  User user) {
         this.birthPlace = birthPlace;
-        this.workPlace = workPlace;
-        this.profilePicture = profilePicture;
         this.livingCity = livingCity;
+        this.occupation = occupation;
+        this.workPlace = workPlace;
         this.studies = studies;
+        this.description = description;
+        this.profilePicture = profilePicture;
         this.user = user;
 
     }

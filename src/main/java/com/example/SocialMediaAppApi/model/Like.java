@@ -22,14 +22,16 @@ public class Like {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     //private Long post_id;
-    private Long userId;
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @Override
     public String toString() {
         return "Like{" +
                 "post=" + post +
                 ", id=" + id +
-                ", userId=" + userId +
+                ", user=" + user +
                 '}';
     }
 }

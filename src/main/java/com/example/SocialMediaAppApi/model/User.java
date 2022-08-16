@@ -36,8 +36,8 @@ public class User{
     private String password;
     private String gender;
     private LocalDate birthDate;
-    private LocalDate joinedDate = LocalDate.now();
-    private String age = calculateAge(birthDate);
+    private LocalDate joinedDate;
+//    private String age ;
 
 
 
@@ -54,16 +54,16 @@ public User( String firstName, String lastName,String email,String password, Str
 
     }
 
-    public User(String firstName, String lastName, String email, String password, String gender, LocalDate birthDate, LocalDate joinedDate, String age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.joinedDate = joinedDate;
-        this.age = age;
-    }
+//    public User(String firstName, String lastName, String email, String password, String gender, LocalDate birthDate, LocalDate joinedDate) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.password = password;
+//        this.gender = gender;
+//        this.birthDate = birthDate;
+//        this.joinedDate = LocalDate.now();
+////        this.age = calculateAge(birthDate);
+//    }
 
     public User(String email, String password) {
         this.email = email;
@@ -75,19 +75,24 @@ public User( String firstName, String lastName,String email,String password, Str
     {
 
         LocalDate currentDate = LocalDate.now();
+
         if ((birthDate != null) && (currentDate != null))
         {
             Period period = Period.between(birthDate, currentDate);
             if(period.isZero()) return period.getMonths()+" months";
             else
+            if(period.getMonths() == 0){
+                return period.getYears() + " years";
+            } else
 
-            return period.getYears()+" years and " + period.getMonths() + " months";
+                return period.getYears()+" years and " + period.getMonths() + " months";
         }
         else
         {
             return null;
         }
     }
+
 
 
 

@@ -1,9 +1,13 @@
 package com.example.SocialMediaAppApi.service;
 
 import com.example.SocialMediaAppApi.model.User;
+import com.example.SocialMediaAppApi.repository.UserRepository;
 import com.example.SocialMediaAppApi.request.RegisterRequest;
 import lombok.AllArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -11,11 +15,18 @@ public class RegisterService {
 
     private final EmailValidator emailValidator;
     private final UserService userService;
+    private final UserRepository userRepository;
 
     public String register(RegisterRequest request) {
+
+        JSONObject response = new JSONObject();
+        JSONObject errorResponse  = new JSONObject();
+
         boolean emailIsValid = emailValidator.test(request.getEmail());
         if(!emailIsValid){
-            throw new IllegalStateException("Email address not valid!");
+            errorResponse.put("errorCode", 1);
+            response.put("error", errorResponse);
+            return response.toString();
         }
 
         User user = new User(
@@ -29,7 +40,12 @@ public class RegisterService {
 
         );
 
+        String result = userService.registerUser(user);
+        response.put("token", result);
+        Optional<User> userOptional = userRepository.findByEmail(user.getEmail());
+        Long idResponse = userOptional.get().getId();
+        response.put("user_id",idResponse);
+        return  response.toString();
 
-        return userService.registerUser(user);
     }
 }

@@ -17,6 +17,9 @@ public interface TokensRepository extends JpaRepository<Token,Long> {
     @Override
     Optional<Token> findById(Long id);
 
+    @Query( "SELECT t FROM Token t WHERE t.token= ?1 ")
+    Token getToken(String myToken);
+
 
     Optional<Token> findByUserId(Long user_id);
 

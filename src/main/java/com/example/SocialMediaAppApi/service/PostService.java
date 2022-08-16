@@ -8,12 +8,18 @@ import com.example.SocialMediaAppApi.request.PostRequest;
 import com.example.SocialMediaAppApi.security.token.Token;
 import com.example.SocialMediaAppApi.security.token.TokenService;
 import lombok.AllArgsConstructor;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Profiles;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
 import java.math.BigInteger;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.springframework.core.env.Environment;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -37,7 +43,9 @@ public class PostService {
 
         );
         postsRepository.save(post);
-        return "post published";
+        JSONObject response = new JSONObject();
+        response.put("addedPost",1);
+        return response.toString();
 
     }
 
@@ -66,6 +74,7 @@ public class PostService {
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
             outputStream.write(data);
             System.out.println(path);
+            path = "/api/uploads/"+ pictureName +"." + extension;
             return path;
         } catch (IOException e) {
             e.printStackTrace();

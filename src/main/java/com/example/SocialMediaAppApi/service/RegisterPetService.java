@@ -7,6 +7,7 @@ import com.example.SocialMediaAppApi.request.RegisterPetRequest;
 import com.example.SocialMediaAppApi.security.token.Token;
 import com.example.SocialMediaAppApi.security.token.TokenService;
 import lombok.AllArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.DatatypeConverter;
@@ -29,7 +30,6 @@ public class RegisterPetService {
 
        String pictureURL = photoProcessing(request.getPicture(), newToken.getUser().getEmail());
 
-
         Pet pet = new Pet(
 
         request.getName(),
@@ -46,9 +46,10 @@ public class RegisterPetService {
 
         );
 
-
         petsRepository.save(pet);
-        return "Register done!";
+        JSONObject response = new JSONObject();
+        response.put("addedPet",1);
+        return response.toString();
     }
 
     public String photoProcessing(String photoString, String userEmail){
@@ -75,6 +76,7 @@ public class RegisterPetService {
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
             outputStream.write(data);
             System.out.println(path);
+            path = "/api/uploads/"+ pictureName +"." + extension;
             return path;
         } catch (IOException e) {
             e.printStackTrace();
