@@ -1,20 +1,16 @@
 package com.example.SocialMediaAppApi.controller;
 
-
-import com.example.SocialMediaAppApi.repository.PetsRepository;
 import com.example.SocialMediaAppApi.request.TestRequest;
 import com.example.SocialMediaAppApi.request.UpdatePetRequest;
 import com.example.SocialMediaAppApi.service.PetService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
 public class PetController {
 
-    private final PetsRepository petsRepository;
     private final PetService petService;
 
     @GetMapping("/myPets/{user_id}")

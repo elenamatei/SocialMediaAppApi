@@ -5,7 +5,6 @@ import com.example.SocialMediaAppApi.service.UserDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor

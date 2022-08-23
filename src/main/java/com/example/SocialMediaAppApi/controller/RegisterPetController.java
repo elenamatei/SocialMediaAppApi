@@ -1,6 +1,5 @@
 package com.example.SocialMediaAppApi.controller;
 
-
 import com.example.SocialMediaAppApi.request.RegisterPetRequest;
 import com.example.SocialMediaAppApi.service.RegisterPetService;
 import lombok.AllArgsConstructor;

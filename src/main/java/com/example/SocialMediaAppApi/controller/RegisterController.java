@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/register")
 @AllArgsConstructor
 public class RegisterController {
-    private RegisterService registerService;
+    private final RegisterService registerService;
 
     @PostMapping
     public String register(@RequestBody RegisterRequest request){

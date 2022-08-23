@@ -1,13 +1,10 @@
 package com.example.SocialMediaAppApi.controller;
 
-
-import com.example.SocialMediaAppApi.repository.CommentsRepository;
 import com.example.SocialMediaAppApi.request.CommentsRequest;
 import com.example.SocialMediaAppApi.request.PostCommentsRequest;
 import com.example.SocialMediaAppApi.service.CommentsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 
 @RestController
 @AllArgsConstructor
