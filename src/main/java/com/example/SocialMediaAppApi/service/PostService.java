@@ -1,28 +1,19 @@
 package com.example.SocialMediaAppApi.service;
 
-
 import com.example.SocialMediaAppApi.model.Post;
-import com.example.SocialMediaAppApi.model.User;
 import com.example.SocialMediaAppApi.repository.PostsRepository;
 import com.example.SocialMediaAppApi.request.PostRequest;
 import com.example.SocialMediaAppApi.security.token.Token;
 import com.example.SocialMediaAppApi.security.token.TokenService;
 import lombok.AllArgsConstructor;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Profiles;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
 import java.math.BigInteger;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import org.springframework.core.env.Environment;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -49,27 +40,25 @@ public class PostService {
 
     }
 
-
     public String photoProcessing(String photoString, String userEmail){
 
         String pictureName =encoder(userEmail+System.currentTimeMillis()) ;
         String[] strings = photoString.split(",");
         String extension;
-        switch (strings[0]) {//check image's extension
+        switch (strings[0]) {
             case "data:image/jpeg;base64":
                 extension = "jpeg";
                 break;
             case "data:image/png;base64":
                 extension = "png";
                 break;
-            default://should write cases for more images types
+            default:
                 extension = "jpg";
                 break;
         }
-        //convert base64 string to binary data
+
         byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
         String path = "C:\\Users\\Eliza\\Desktop\\Licenta\\SocialMediaAppApi\\src\\main\\resources\\Images\\"+ pictureName +"." + extension;
-//        String path = "/resources/Images/"+ pictureName +"." + extension;
         File file = new File(path);
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
             outputStream.write(data);
@@ -102,7 +91,5 @@ public class PostService {
             throw new RuntimeException(e);
         }
     }
-
-
 
 }

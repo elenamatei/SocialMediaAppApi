@@ -1,18 +1,12 @@
 package com.example.SocialMediaAppApi.service;
 
-
-import com.example.SocialMediaAppApi.model.Details;
 import com.example.SocialMediaAppApi.model.Pet;
-import com.example.SocialMediaAppApi.model.Post;
-import com.example.SocialMediaAppApi.model.User;
 import com.example.SocialMediaAppApi.repository.PetsRepository;
-import com.example.SocialMediaAppApi.repository.UserRepository;
 import com.example.SocialMediaAppApi.request.TestRequest;
 import com.example.SocialMediaAppApi.request.UpdatePetRequest;
-import com.example.SocialMediaAppApi.request.UpdateUserRequest;
 import com.example.SocialMediaAppApi.security.token.Token;
 import com.example.SocialMediaAppApi.security.token.TokenService;
-import com.example.SocialMediaAppApi.security.token.TokensRepository;
+
 import lombok.AllArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -23,7 +17,6 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -112,18 +105,17 @@ public class PetService {
         String[] strings = photoString.split(",");
         String extension;
 
-        switch (strings[0]) {//check image's extension
+        switch (strings[0]) {
             case "data:image/jpeg;base64":
                 extension = "jpeg";
                 break;
             case "data:image/png;base64":
                 extension = "png";
                 break;
-            default://should write cases for more images types
+            default:
                 extension = "jpg";
                 break;
         }
-        //convert base64 string to binary data
         byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
         String path = "C:\\Users\\Eliza\\Desktop\\Licenta\\SocialMediaAppApi\\src\\main\\resources\\Images\\"+ pictureName +"." + extension;
 
@@ -157,5 +149,4 @@ public class PetService {
             throw new RuntimeException(e);
         }
     }
-
 }

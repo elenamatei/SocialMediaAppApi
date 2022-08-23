@@ -1,6 +1,5 @@
 package com.example.SocialMediaAppApi.request;
 
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
@@ -39,7 +38,6 @@ public class UpdateUserRequest {
         this.password = password;
         this.gender = gender;
         this.birthDate = birthDate;
-
         this.birthPlace = birthPlace;
         this.livingCity = livingCity;
         this.occupation = occupation;

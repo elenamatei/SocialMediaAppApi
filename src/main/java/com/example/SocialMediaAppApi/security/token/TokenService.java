@@ -1,16 +1,12 @@
 package com.example.SocialMediaAppApi.security.token;
 
-
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
 import java.util.Collection;
-//import java.util.Date;
 
 @Service
 @AllArgsConstructor
@@ -18,7 +14,6 @@ public class TokenService {
 
     private final TokensRepository tokensRepository;
 
-//    private final Token inputToken;
 
     public String encoder(String input)
     {
@@ -59,9 +54,6 @@ public class TokenService {
         }else
             return null;
 
-
     }
-
-
 
 }

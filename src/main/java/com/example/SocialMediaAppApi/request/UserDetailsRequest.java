@@ -1,9 +1,7 @@
 package com.example.SocialMediaAppApi.request;
 
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -21,7 +19,6 @@ public class UserDetailsRequest {
     private final String livingCity;
     private final String studies;
     private final String token;
-
 
 
     @JsonCreator

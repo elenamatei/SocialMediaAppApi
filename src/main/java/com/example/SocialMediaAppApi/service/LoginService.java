@@ -1,11 +1,8 @@
 package com.example.SocialMediaAppApi.service;
 
-
 import com.example.SocialMediaAppApi.model.User;
 import com.example.SocialMediaAppApi.repository.UserRepository;
 import com.example.SocialMediaAppApi.request.LoginRequest;
-import com.example.SocialMediaAppApi.security.token.Token;
-import com.example.SocialMediaAppApi.security.token.TokenService;
 import lombok.AllArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -53,10 +50,8 @@ public class LoginService {
         String userName = userOptional.get().getFirstName() +" "+ userOptional.get().getLastName();
         response.put("full_name",userName);
 
-
         return  response.toString();
 
     }
-
 
 }

@@ -1,15 +1,12 @@
 package com.example.SocialMediaAppApi.request;
 
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.time.LocalDate;
-import java.time.Period;
 
 @Getter
 @EqualsAndHashCode
@@ -45,6 +42,5 @@ public class RegisterPetRequest {
         this.token = token;
 
     }
-
 
 }

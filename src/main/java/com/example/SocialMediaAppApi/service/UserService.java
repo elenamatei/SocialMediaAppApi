@@ -2,7 +2,6 @@ package com.example.SocialMediaAppApi.service;
 
 import com.example.SocialMediaAppApi.model.Details;
 import com.example.SocialMediaAppApi.model.Pet;
-import com.example.SocialMediaAppApi.model.Post;
 import com.example.SocialMediaAppApi.model.User;
 import com.example.SocialMediaAppApi.repository.PetsRepository;
 import com.example.SocialMediaAppApi.repository.UserDetailsRepository;
@@ -22,7 +21,6 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +34,6 @@ public class UserService{
     private final TokensRepository tokensRepository;
     private final PetsRepository petsRepository;
     private final TokenService tokenService;
-    private final PetService petService;
 
     public String registerUser(User user) {
         boolean emailTaken = userRepository.findByEmail(user.getEmail()).isPresent();
@@ -130,21 +127,20 @@ public class UserService{
         String pictureName =encoder(userEmail+System.currentTimeMillis()) ;
         String[] strings = photoString.split(",");
         String extension;
-        switch (strings[0]) {//check image's extension
+        switch (strings[0]) {
             case "data:image/jpeg;base64":
                 extension = "jpeg";
                 break;
             case "data:image/png;base64":
                 extension = "png";
                 break;
-            default://should write cases for more images types
+            default:
                 extension = "jpg";
                 break;
         }
-        //convert base64 string to binary data
+
         byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
         String path = "C:\\Users\\Eliza\\Desktop\\Licenta\\SocialMediaAppApi\\src\\main\\resources\\Images\\"+ pictureName +"." + extension;
-//        String path = "/resources/Images/"+ pictureName +"." + extension;
         File file = new File(path);
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
             outputStream.write(data);
@@ -177,7 +173,5 @@ public class UserService{
             throw new RuntimeException(e);
         }
     }
-
-
 
 }

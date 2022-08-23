@@ -1,6 +1,5 @@
 package com.example.SocialMediaAppApi.request;
 
-
 import com.example.SocialMediaAppApi.model.Pet;
 import com.example.SocialMediaAppApi.model.User;
 import lombok.AllArgsConstructor;
@@ -28,7 +27,6 @@ public class AdoptionRequest {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    //private Long pet_id;
     private Long adminUserId;
     private Long clientUserId;
     private Boolean isAccepted = false;

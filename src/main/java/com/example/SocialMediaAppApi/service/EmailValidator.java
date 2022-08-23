@@ -16,4 +16,3 @@ public class EmailValidator implements Predicate<String> {
         return matcher.find();
     }
 }
-

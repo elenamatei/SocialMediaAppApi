@@ -58,21 +58,19 @@ public class RegisterPetService {
         String pictureName =encoder(userEmail+System.currentTimeMillis()) ;
         String[] strings = photoString.split(",");
         String extension;
-        switch (strings[0]) {//check image's extension
+        switch (strings[0]) {
             case "data:image/jpeg;base64":
                 extension = "jpeg";
                 break;
             case "data:image/png;base64":
                 extension = "png";
                 break;
-            default://should write cases for more images types
+            default:
                 extension = "jpg";
                 break;
         }
-        //convert base64 string to binary data
         byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
         String path = "C:\\Users\\Eliza\\Desktop\\Licenta\\SocialMediaAppApi\\src\\main\\resources\\Images\\"+ pictureName +"." + extension;
-//        String path = "/resources/Images/"+ pictureName +"." + extension;
         File file = new File(path);
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
             outputStream.write(data);
@@ -105,6 +103,5 @@ public class RegisterPetService {
             throw new RuntimeException(e);
         }
     }
-
 
 }

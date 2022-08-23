@@ -1,6 +1,7 @@
 package com.example.SocialMediaAppApi.model;
 
 import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
