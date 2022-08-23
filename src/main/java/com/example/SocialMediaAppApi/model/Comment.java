@@ -15,37 +15,21 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
-    @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id")
-    private Post post;
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    //private Long post_id;
-//    private Long userId;
+    private Long postId;
+    private Long userId;
+    private String userName;
     private String text;
 
 
-    public Comment(String text, User user, Post post) {
+    public Comment(String text, Long postId,Long userId, String userName) {
         this.text = text;
-        this.user = user;
-        this.post = post;
-
-
-
+        this.postId = postId;
+        this.userId = userId;
+        this.userName = userName;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "post=" + post +
-                ", user=" + user +
-                ", id=" + id +
-                ", text='" + text + '\'' +
-                '}';
-    }
 }

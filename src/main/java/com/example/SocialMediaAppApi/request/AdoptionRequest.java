@@ -1,6 +1,8 @@
-package com.example.SocialMediaAppApi.model;
+package com.example.SocialMediaAppApi.request;
 
 
+import com.example.SocialMediaAppApi.model.Pet;
+import com.example.SocialMediaAppApi.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

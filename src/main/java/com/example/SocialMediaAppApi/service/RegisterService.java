@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -29,6 +31,8 @@ public class RegisterService {
             return response.toString();
         }
 
+        LocalDate dateT = LocalDate.now();
+
         User user = new User(
                 request.getFirstName(),
                 request.getLastName(),
@@ -36,7 +40,7 @@ public class RegisterService {
                 request.getPassword(),
                 request.getGender(),
                 request.getBirthDate(),
-                request.getJoinedDate()
+                dateT
 
         );
 
@@ -45,6 +49,10 @@ public class RegisterService {
         Optional<User> userOptional = userRepository.findByEmail(user.getEmail());
         Long idResponse = userOptional.get().getId();
         response.put("user_id",idResponse);
+
+        String userName = userOptional.get().getFirstName() +" "+ userOptional.get().getLastName();
+        response.put("full_name",userName);
+
         return  response.toString();
 
     }

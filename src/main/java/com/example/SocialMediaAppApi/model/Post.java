@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -23,7 +22,6 @@ public class Post {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    //private Long user_id;
     private String picture;
     private String text;
     private LocalDate postDate;
@@ -34,12 +32,6 @@ public class Post {
         this.postDate = LocalDate.now();
         this.user = user;
     }
-    public Post(String picture, String text, User user) {
-        this.picture = picture;
-        this.text = text;
-        this.user = user;
-    }
-
 
     @Override
     public String toString() {

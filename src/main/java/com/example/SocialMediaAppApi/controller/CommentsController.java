@@ -1,14 +1,13 @@
 package com.example.SocialMediaAppApi.controller;
 
 
-import com.example.SocialMediaAppApi.model.Comment;
 import com.example.SocialMediaAppApi.repository.CommentsRepository;
 import com.example.SocialMediaAppApi.request.CommentsRequest;
+import com.example.SocialMediaAppApi.request.PostCommentsRequest;
 import com.example.SocialMediaAppApi.service.CommentsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 
 @RestController
 @AllArgsConstructor
@@ -16,7 +15,6 @@ import java.util.Collection;
 public class CommentsController {
 
     private final CommentsService commentsService;
-    private final CommentsRepository commentsRepository;
 
     @PostMapping("/postComment")
     public String postComment(@RequestBody CommentsRequest request)
@@ -24,22 +22,10 @@ public class CommentsController {
         return commentsService.postComment(request);
     }
 
-    @GetMapping("/postIdComments")
-    Collection<Comment> commentsByPostId(@PathVariable Long post_id){
-
-        return commentsService.getCommentsForPostId(post_id);
+    @PostMapping("/getCommentsForPost")
+    public String getComments(@RequestBody PostCommentsRequest request1)
+    {
+        return commentsService.getCommentsForPostIdAndUser(request1.getPostId());
     }
-
-    @GetMapping("/")
-    Collection<Comment> commentsByPostIdAndUserId(@PathVariable Long post_id, @PathVariable Long user_id){
-
-        return commentsService.getCommentsForPostIdAndUserId(post_id,user_id);
-    }
-
-    @DeleteMapping()
-    void deleteComment(@PathVariable Long id) {
-        commentsRepository.deleteById(id);
-    }
-
 
 }

@@ -42,6 +42,7 @@ public class RegisterPetService {
         request.getDescription(),
         request.getIsNeutered(),
         pictureURL,
+        request.getIsAdoption(),
         newToken.getUser()
 
         );

@@ -1,21 +1,17 @@
 package com.example.SocialMediaAppApi.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
-
 
 @Entity
 @Table(name="Pets")
 @Getter
 @Setter
 @NoArgsConstructor
-//@AllArgsConstructor
+
 public class Pet {
 
     @ManyToOne
@@ -25,7 +21,6 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //private Long user_id;
     private String picture;
     private String name;
     private String type;
@@ -36,10 +31,10 @@ public class Pet {
     private String favouriteFood;
     private String description;
     private String isNeutered;
-    private Boolean isAdoption = false;
-//    private String age;
+    private Boolean isAdoption;
 
-    public Pet(String name, String type, String race, String color, LocalDate birthDate, String gender, String favouriteFood, String description, String isNeutered, String picture, User user) {
+
+    public Pet(String name, String type, String race, String color, LocalDate birthDate, String gender, String favouriteFood, String description, String isNeutered, String picture, Boolean isAdoption, User user) {
         this.name = name;
         this.type = type;
         this.race = race;
@@ -50,32 +45,9 @@ public class Pet {
         this.description = description;
         this.isNeutered = isNeutered;
         this.picture = picture;
+        this.isAdoption = isAdoption;
         this.user = user;
-//        this.age = calculateAge(birthDate);
 
-    }
-
-
-    public static String calculateAge(LocalDate birthDate)
-    {
-
-        LocalDate currentDate = LocalDate.now();
-
-        if ((birthDate != null) && (currentDate != null))
-        {
-            Period period = Period.between(birthDate, currentDate);
-            if(period.getYears() == 0) return period.getMonths()+" months";
-            else
-            if(period.getMonths() == 0){
-                return period.getYears() + " years";
-            } else
-
-                return period.getYears()+" years and " + period.getMonths() + " months";
-        }
-        else
-        {
-            return null;
-        }
     }
 
 

@@ -17,8 +17,8 @@ public class CommentsRequest {
 
     private final String text;
     private final String token;
-    private final User user;
-    private final Post post;
+    private final Long postId;
+    private final String userName;
 
 
 //    @JsonCreator
@@ -33,12 +33,12 @@ public class CommentsRequest {
 
 //
     @JsonCreator
-    public CommentsRequest(@JsonProperty("text")String text, @JsonProperty("user_id") User user, @JsonProperty("post_id")Post post, @JsonProperty("token")String token){
+    public CommentsRequest(@JsonProperty("text")String text,@JsonProperty("postId")Long postId, @JsonProperty("token") String token, @JsonProperty("userName") String userName){
 
         this.text = text;
-        this.user = user;
-        this.post = post;
+        this.postId = postId;
         this.token = token;
+        this.userName = userName;
 
 
     }

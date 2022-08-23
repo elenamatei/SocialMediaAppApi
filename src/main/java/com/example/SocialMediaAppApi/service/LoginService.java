@@ -49,6 +49,11 @@ public class LoginService {
         Long idResponse = userOptional.get().getId();
 
         response.put("user_id",idResponse);
+
+        String userName = userOptional.get().getFirstName() +" "+ userOptional.get().getLastName();
+        response.put("full_name",userName);
+
+
         return  response.toString();
 
     }

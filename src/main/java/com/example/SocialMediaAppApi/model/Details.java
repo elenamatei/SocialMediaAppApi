@@ -30,17 +30,6 @@ public class Details {
     private String livingCity;
     private String studies;
 
-    public Details( String description, Integer petsNumber, String occupation, String workPlace,String profilePicture, String birthPlace, String livingCity, String studies) {
-        this.description = description;
-        this.petsNumber = petsNumber;
-        this.occupation = occupation;
-        this.workPlace = workPlace;
-        this.profilePicture = profilePicture;
-        this.birthPlace = birthPlace;
-        this.livingCity = livingCity;
-        this.studies = studies;
-    }
-
 
     public Details( String birthPlace,String livingCity,String occupation, String workPlace, String studies,String description,  String profilePicture,  User user) {
         this.birthPlace = birthPlace;
@@ -54,6 +43,4 @@ public class Details {
 
     }
 
-//    public Details(String description, String occupation, String birthPlace, String workPlace, String profilePicture, String livingCity, String studies, String token) {
-//    }
 }

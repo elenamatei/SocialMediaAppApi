@@ -22,7 +22,6 @@ public class UserDetailsService {
 
     private final TokenService tokenService;
     private final UserDetailsRepository userDetailsRepository;
-    private final UserRepository userRepository;
 
     public String addDetails(UserDetailsRequest request){
         Token newToken = tokenService.verifyToken(request.getToken());
@@ -101,15 +100,5 @@ public class UserDetailsService {
             throw new RuntimeException(e);
         }
     }
-
-    public Details getDetailsForUser(Long user_id){
-
-        System.out.println(userDetailsRepository.getDetailsForUser(user_id) + "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
-        return userDetailsRepository.getDetailsForUser(user_id);
-
-
-    }
-
-
 
 }

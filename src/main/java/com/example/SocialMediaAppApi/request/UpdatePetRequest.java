@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @ToString
 public class UpdatePetRequest {
 
+    private final Long id;
     private final String token;
     private final String picture;
     private final String name;
@@ -27,7 +28,8 @@ public class UpdatePetRequest {
     private final String isNeutered;
 
     @JsonCreator
-    public UpdatePetRequest(@JsonProperty("token") String token,@JsonProperty("picture") String picture,@JsonProperty("name") String name,@JsonProperty("type") String type,@JsonProperty("race") String race,@JsonProperty("color")String color,@JsonProperty("birthDate") LocalDate birthDate,@JsonProperty("gender") String gender,@JsonProperty("favouriteFood") String favouriteFood,@JsonProperty("description") String description,@JsonProperty("isNeutered") String isNeutered) {
+    public UpdatePetRequest(@JsonProperty("petId")Long id, @JsonProperty("token") String token,@JsonProperty("picture") String picture,@JsonProperty("name") String name,@JsonProperty("type") String type,@JsonProperty("race") String race,@JsonProperty("color")String color,@JsonProperty("birthDate") LocalDate birthDate,@JsonProperty("gender") String gender,@JsonProperty("favouriteFood") String favouriteFood,@JsonProperty("description") String description,@JsonProperty("isNeutered") String isNeutered) {
+        this.id = id;
         this.token = token;
         this.picture = picture;
         this.name = name;

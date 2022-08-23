@@ -26,10 +26,11 @@ public class RegisterPetRequest {
     private final String description;
     private final String isNeutered;
     private final String picture;
+    private final Boolean isAdoption;
     private final String token;
 
     @JsonCreator
-    public RegisterPetRequest(@JsonProperty("name")String name,@JsonProperty("type") String type,@JsonProperty("race") String race,@JsonProperty("color") String color,@JsonProperty("birthDate") LocalDate birthDate,@JsonProperty("gender") String gender,@JsonProperty("favouriteFood") String favouriteFood,@JsonProperty("description") String description,@JsonProperty("isNeutered") String isNeutered,@JsonProperty("picture") String picture,@JsonProperty("token") String token) {
+    public RegisterPetRequest(@JsonProperty("name")String name,@JsonProperty("type") String type,@JsonProperty("race") String race,@JsonProperty("color") String color,@JsonProperty("birthDate") LocalDate birthDate,@JsonProperty("gender") String gender,@JsonProperty("favouriteFood") String favouriteFood,@JsonProperty("description") String description,@JsonProperty("isNeutered") String isNeutered,@JsonProperty("picture") String picture,@JsonProperty("isAdoption") Boolean isAdoption , @JsonProperty("token") String token) {
         this.name = name;
         this.type = type;
         this.race = race;
@@ -40,6 +41,7 @@ public class RegisterPetRequest {
         this.description = description;
         this.isNeutered = isNeutered;
         this.picture = picture;
+        this.isAdoption = isAdoption;
         this.token = token;
 
     }

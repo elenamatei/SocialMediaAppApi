@@ -1,6 +1,5 @@
 package com.example.SocialMediaAppApi.controller;
 
-
 import com.example.SocialMediaAppApi.request.LoginRequest;
 import com.example.SocialMediaAppApi.service.LoginService;
 import lombok.AllArgsConstructor;
